@@ -6,7 +6,7 @@ public:
 	IDirectoryIterator(const char * path, const char * match = NULL);
 	virtual ~IDirectoryIterator();
 
-	WIN32_FIND_DATA *	Get(void)	{ return &m_result; }
+	WIN32_FIND_DATAA *	Get(void)	{ return &m_result; }
 	void		GetFullPath(char * out, UInt32 outLen);
 	std::string	GetFullPath(void);
 
