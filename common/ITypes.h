@@ -220,6 +220,44 @@ class Time
 		bool	hasData;
 };
 
+/**
+ *	DateTime storage
+ */
+class DateTime
+{
+	public:
+				DateTime()			{ Clear(); }
+				~DateTime()			{ }
+		
+		//! Deinitialize the class
+		void	Clear(void)			{ ms = seconds = minutes = hours = day = month = year = 0; hasData = false; }
+		//! Sets the class to the current date
+		//! @todo implement this
+		void	SetToNow(void)		{ SetDate(1, 2, 3); SetTime(0, 1, 2, 3); }
+		
+		//! Sets the class to the specified date
+		void	SetDate(UInt16 inD, UInt16 inM, UInt16 inY)
+									{ day = inD; month = inM; year = inY; hasData = true; }
+		//! Sets the class to the specified time
+		void	SetTime(UInt16 inMS, UInt16 inS, UInt16 inM, UInt16 inH)
+									{ ms = inMS; seconds = inS; minutes = inM; hours = inH; hasData = true; }
+		
+		//! Gets whether the class has been initialized or not
+		bool	IsSet(void)			{ return hasData; }
+		
+		UInt16	GetMS(void)			{ return ms; }		//!< return the milliseconds portion of the time
+		UInt16	GetSeconds(void)	{ return seconds; }	//!< return the seconds portion of the time
+		UInt16	GetMinutes(void)	{ return minutes; }	//!< return the minutes portion of the time
+		UInt16	GetHours(void)		{ return hours; }	//!< return the hours portion of the time
+		UInt16	GetDay(void)		{ return day; }		//!< return the day portion of the time
+		UInt16	GetMonth(void)		{ return month; }	//!< return the month portion of the time
+		UInt16	GetYear(void)		{ return year; }	//!< return the year portion of the time
+	
+	private:
+		UInt16	ms, seconds, minutes, hours, day, month, year;
+		bool	hasData;
+};
+
 const float kFloatEpsilon = 0.0001f;
 
 inline bool FloatEqual(float a, float b) { float magnitude = a - b; if(magnitude < 0) magnitude = -magnitude; return magnitude < kFloatEpsilon; }

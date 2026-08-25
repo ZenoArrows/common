@@ -32,6 +32,18 @@ std::string IDirectoryIterator::GetFullPath(void)
 	return std::string(m_path) + "\\" + std::string(m_result.cFileName);
 }
 
+DateTime IDirectoryIterator::GetModifiedTime(void)
+{
+	DateTime mtime;
+	SYSTEMTIME sysTime;
+	if(!FileTimeToSystemTime(&m_result.ftLastWriteTime, &sysTime))
+	{
+		mtime.SetDate(sysTime.wDay, sysTime.wMonth, sysTime.wYear);
+		mtime.SetTime(sysTime.wMilliseconds, sysTime.wSecond, sysTime.wMinute, sysTime.wHour);
+	}
+	return mtime;
+}
+
 void IDirectoryIterator::Next(void)
 {
 	BOOL	result = FindNextFile(m_searchHandle, &m_result);
